@@ -20,6 +20,8 @@ class HistoryResource extends Resource
     protected static ?string $navigationGroup = 'Автосервис';
     protected static ?string $navigationLabel = "История посещений";
     protected static ?int $navigationSort = 4;
+    protected static ?string $modelLabel = "";
+    protected static ?string $pluralLabel = "История";
 
     public static function canCreate(): bool
     {

@@ -27,6 +27,10 @@ class CarBrandResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = "";
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->role === 'admin';
+    }
 
     protected static ?string $pluralLabel = "Марки";
 

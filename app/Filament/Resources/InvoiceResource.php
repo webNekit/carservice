@@ -30,7 +30,16 @@ class InvoiceResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Автосервис';
     protected static ?string $navigationLabel = "Накладные";
+
+    protected static ?string $modelLabel = "";
+
+    protected static ?string $pluralLabel = "Накладные";
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Invoice::where('status', 'в обработке')->count();
+    }
 
     public static function form(Forms\Form $form): Forms\Form
     {
