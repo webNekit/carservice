@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class CarModel extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'brand_id',
+        'name',
+        'generation',
+        'year',
+    ];
+
+    public function brand()
+    {
+        return $this->belongsTo(CarBrand::class);
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'client_car', 'car_model_id', 'client_id');
+    }
+}
