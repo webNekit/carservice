@@ -57,5 +57,24 @@ class Invoice extends Model
                 $invoice->user_id = Auth::id();
             }
         });
+
+        static::updated(function ($invoice) {
+            // Проверяем, изменился ли статус на "выполнено"
+            if ($invoice->isDirty('status') && $invoice->status === 'выполнено') {
+                \App\Models\History::create([
+                    'invoice_id' => $invoice->id,
+                    'client_id' => $invoice->client_id,
+                    'car_id' => $invoice->car_id,
+                    'service_id' => $invoice->service_id,
+                    'user_id' => $invoice->user_id,
+                    'appointment_date' => $invoice->appointment_date,
+                    'completion_date' => $invoice->completion_date,
+                    'cost' => $invoice->cost,
+                    'note' => $invoice->note,
+                    'discount' => $invoice->discount,
+                    'parts' => $invoice->parts,
+                ]);
+            }
+        });
     }
 }

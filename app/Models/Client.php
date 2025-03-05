@@ -20,6 +20,17 @@ class Client extends Model
         return $this->hasMany(ClientCar::class, 'client_id');
     }
 
+    public function history()
+    {
+        return $this->hasMany(History::class);
+    }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
+
+
     public function getFullNameAttribute()
     {
         return "{$this->last_name} {$this->first_name}";
